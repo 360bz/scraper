@@ -44,7 +44,7 @@ def scrape_imdb(url):
         # Finally, save the record to the datastore - 'Name' is our unique key
         scraperwiki.sqlite.save(["Title"], record)
         
-imdblist = ['pro.imdb.com/inproduction/development?ref_=hm_nv_tt_dev#type=movie&status=DEVELOPMENT%2CPRE_PRODUCTION%2CPRODUCTION%2CPOST_PRODUCTION&year=2020-2020&country=US%2CGB%2CCA%2CAU&sort=ranking&pos=0']
+imdblist = ['scraper.py']
 for url in imdblist:
     fullurl = 'https://'+url
     print 'scraping ', fullurl
