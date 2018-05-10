@@ -9,7 +9,7 @@ def scrape_imdb(url):
     root = lxml.html.fromstring(html)
     #line below selects all <div class="reveal-modal medium"> - note that because there is a space in the value of the div class, we need to use a space to indicate that
     # rows = root.cssselect("div.lister-item-content")
-    rows = root.cssselect("lister-item mode-advanced")
+    rows = root.cssselect("lister-item content")
         for row in rows:
         print row
         # Set up our data record - we'll need it later
