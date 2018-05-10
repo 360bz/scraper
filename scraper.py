@@ -8,8 +8,9 @@ def scrape_imdb(url):
     print html
     root = lxml.html.fromstring(html)
     #line below selects all <div class="reveal-modal medium"> - note that because there is a space in the value of the div class, we need to use a space to indicate that
-    rows = root.cssselect("div.lister-item-content")
-    for row in rows:
+    # rows = root.cssselect("div.lister-item-content")
+    rows = root.cssselect("lister-item mode-advanced")
+        for row in rows:
         print row
         # Set up our data record - we'll need it later
         record = {}
@@ -27,11 +28,17 @@ def scrape_imdb(url):
         #repeat for <span class="genre">
         gen = row.cssselect("span.genre")
         genre = gen[0].text
+        #repeat for <span class="certificate">
+        cert = row.cssselect("span.certificate")
+        certificate = cert[0].text
+        #repeat for <span class="runtime">
+        runt = row.cssselect("span.runtime")
+        runtime = runt[0].text
         #repeat process for <p class="text-muted">
         txt = row.cssselect("p.text-muted")
         description = txt[1].text_content()
         href = row.cssselect("a")
-        director = href[12].text
+        director = href[2].text
         #record['URL'] = url
         record['Title'] = title
         record['Year'] = year
@@ -39,6 +46,8 @@ def scrape_imdb(url):
         record['Metascore'] = metascore
         record['Genre'] = genre
         record['Description'] = description
+        record['Certificate'] = certificate
+        record['Duration'] = runtime
         record['Director'] = director
         print record, '------------'
         # Finally, save the record to the datastore - 'Name' is our unique key
